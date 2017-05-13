@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<br><p> test create node </p>
+<form action="/webapi/create-node" method="post">
+	attrName:<input type="text" name="AttrName">	
+	attrValue:<input type="text" name="AttrValue">
+	<input type="submit" value="submit">
+</form>
+
+<br><p> test set node befor after</p>
+<form action="/webapi/set-node-befor-after" method="post">
+	beforNodeId:<input type="text" name="ID1">
+	afterNodeId:<input type="text" name="ID2">
+	<input type="submit" value="submit">
+</form>
+
+<br><p> test delete node</p>
+<form action="/webapi/delete-node" method="post">
+	deleteNodeId:<input type="text" name="ID">
+	<input type="submit" value="submit">
+</form>
+
+<br><p> test set node attr</p>
+<form action="/webapi/set-node-attr" method="post">
+	nodeId:<input type="text" name="ID">
+	attrName:<input type="text" name="AttrName">
+	attrValue:<input type="text" name="AttrValue">
+	<input type="submit" value="submit">
+</form>
+
+<br><p> test add child node</p>
+<form action="/webapi/add-child-node" method="post">
+	superNodeId:<input type="text" name="ID1">
+	childNodeId:<input type="text" name="ID2">
+	<input type="submit" value="submit">
+</form>
+
+
+<br><p> test create user </p>
+<form action="/webapi/create-user" method="post">
+	attrName:<input type="text" name="AttrName">
+	attrValue:<input type="text" name="AttrValue">
+	<input type="submit" value="submit">
+</form>
+
+<br><p> test set user attr</p>
+<form action="/webapi/set-user-attr" method="post">
+	nodeId:<input type="text" name="ID">
+	attrName:<input type="text" name="AttrName">
+	attrValue:<input type="text" name="AttrValue">
+	<input type="submit" value="submit">
+</form>
+
+</body>
+</html>
