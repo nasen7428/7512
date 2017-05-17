@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from WebAPI.models import Node
+from WebAPI.models import Node,User,Space
 import json
 
 
@@ -21,5 +21,7 @@ def spaceviewedit(request):
     return render(request,'spaceedit.html')
 
 #用户设置页面
-def usersetting(request):
-    return render(request,'usersetting.html')
+def usersetting(request,userId):
+    user=User.objects.get(id=userId)
+    attrdict=json.loads(user.attribute)
+    return render(request,'useredit.html',{'userId':user.id,'AttrList':attrdict})
