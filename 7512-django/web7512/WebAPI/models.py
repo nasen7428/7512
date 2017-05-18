@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
-import json
+import json,logging
+
+logger=logging.getLogger(__name__)
 
 # Create your models here.
 
@@ -42,6 +44,14 @@ class Node(models.Model):
         nodespacelist.append(spaceId)
         self.spacelist=json.dumps(nodespacelist)
 
+    #获取后继节点列表
+    def getAfterNode(self):
+        try:
+            afternodelist=json.loads(self.afterlist)
+        except:
+            afternodelist=[]
+        return afternodelist
+
 #节点空间
 class Space(models.Model):
     #空间起始节点
@@ -54,6 +64,28 @@ class Space(models.Model):
             childnodelist=[]
         childnodelist.append(nodeId)
         self.childlist=json.dumps(childnodelist)
+
+    #获取空间所有节点
+    def getAllNode(self):
+        try:
+            childnodelist=json.loads(self.childlist)
+        except:
+            childnodelist=[]
+        rentlist={}
+        logger.info('start node')
+        for childId in childnodelist:#获取起始节点
+            node=Node.objects.get(id==childId)
+            rentlist[childId]={isFirst:True,afterlist:node.getAfterNode()}
+        logger.info('start node end')
+        for rentnode in rentlist.values():#递归获取所有节点
+            for rnalid in rentnode[afterlist]:
+                if rentlist.has_key(rnalid):
+                    continue
+                node=Node.objects.get(id==rnalid)
+                rentlist[rnalid]={isFirst:False,afterlist:node.getAfterNode()}
+        logger.info('after node end')
+        return rentlist
+
 
 #用户
 class User(models.Model):

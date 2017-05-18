@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js">
+	</script>
+
+	<script >
+	$(function(){
+			$("#btncreatespace")
+			.click(function(){
+				//添加一个子空间
+				$.post("/webapi/add-child-space",{
+					ID:{{nodeId}}
+				},function(data,status){
+					$("#new_space").append("<input type='button' value=''"+data+"'>'");
+				})
+			});
+		});
+	</script>
 </head>
 <body>
-				id:{{nodeId}}<br/>
-				{%for k,v in AttrList.items %}
-				<input type="text" value={{k}}>
-				<input type="text" value={{v}}>
-				<br/>
-				{% endfor %}
+	id:{{nodeId}}<br/>
+	<div id="attr list">
+		attr:<br>
+		{%for k,v in AttrList.items %}
+		<input type="text" value={{k}}>
+		<input type="text" value={{v}}>
+		<br/>
+		{% endfor %}
+	</div>
+	<div id="space list">
+		space:<br>
+		{% for id in SpaceList %}
+		<form action="/edit/space/{{id}}" method="post">
+		<input type="submit" value={{id}}>
+		</form>
+		<br/>
+		{% endfor %}
+		<div id="new_space">
+		</div>
+
+		<input type="button" value="create a new space" id="btncreatespace">
+	</div>
+
 </body>
 </html>

@@ -14,14 +14,16 @@ def nodeviewtest(request):
 def nodeviewedit(request,nodeId):
     node=Node.objects.get(id=nodeId)
     attrdict=json.loads(node.attribute)
-    return render(request,'nodeedit.html',{'nodeId':node.id,'AttrList':attrdict})
+    spacelist=json.loads(node.spacelist)
+    return render(request,'nodeedit.html',{'nodeId':node.id,'AttrList':attrdict,'SpaceList':spacelist})
 
 #空间编辑界面
-def spaceviewedit(request):
-    return render(request,'spaceedit.html')
+def spaceviewedit(request,spaceId):
+	space=Space.objects.get(id=spaceId)
+	return render(request,'spaceedit.html',{'spaceId':space.id,'spaceNodes':space.getAllNode()})
 
 #用户设置页面
 def usersetting(request,userId):
     user=User.objects.get(id=userId)
     attrdict=json.loads(user.attribute)
-    return render(request,'useredit.html',{'userId':user.id,'AttrList':attrdict})
+    return render(request,'usersetting.html',{'userId':user.id,'AttrList':attrdict})

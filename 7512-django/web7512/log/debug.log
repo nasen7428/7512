@@ -1,0 +1,57 @@
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:06:54.849117'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:06:54.849117')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1557
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:07:22.981968'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:07:22.981968')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1557
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:12:38.385727'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:12:38.385727')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1571
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:13:19.304063'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:13:19.304063')
+(0.001) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1569
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:14:09.579644'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:14:09.579644')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1584
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:15:26.504866'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:15:26.504866')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1681
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:16:53.657119'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:16:53.657119')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1700
+(0.002) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:19:14.236945'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:19:14.236945')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1704
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:22:53.467148'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:22:53.467148')
+(0.001) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1724
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:23:11.888374'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:23:11.888374')
+(0.001) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1724
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:23:14.901518'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:23:14.901518')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1724
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:24:10.280281'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:24:10.280281')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1740
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:26:02.700656'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:26:02.700656')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1762
+(0.001) SELECT "django_session"."session_key", "django_session"."session_data", "django_session"."expire_date" FROM "django_session" WHERE ("django_session"."session_key" = 'la5hgnneum6zxljy4sjj4zvlofstrtj1' AND "django_session"."expire_date" > '2017-05-18 10:30:36.310405'); args=('la5hgnneum6zxljy4sjj4zvlofstrtj1', '2017-05-18 10:30:36.310405')
+(0.000) SELECT "WebAPI_space"."id", "WebAPI_space"."childlist" FROM "WebAPI_space" WHERE "WebAPI_space"."id" = 2; args=(2,)
+"GET /edit/space/2 HTTP/1.1" 200 1769

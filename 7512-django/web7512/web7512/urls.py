@@ -16,8 +16,7 @@ Including another URLconf
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
 from django.contrib import admin
-from . import webapp
-from . import webapi
+from . import webapp,webapi
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

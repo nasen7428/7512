@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+<p>***********************node*************************</p>
 <br><p> test create node </p>
 <form action="/webapi/create-node" method="post">
 	attrName:<input type="text" name="AttrName">	
@@ -30,13 +30,23 @@
 	<input type="submit" value="submit">
 </form>
 
+<p>***********************space**************************</p>
+
+<br><p> test add space </p>
+<form action="/webapi/add-child-space" method="post">
+	superNodeId:<input type="text" name="ID">
+	<input type="submit" name="add-child-space">
+</form>
+
 <br><p> test add child node</p>
 <form action="/webapi/add-child-node" method="post">
-	superNodeId:<input type="text" name="ID1">
-	childNodeId:<input type="text" name="ID2">
+	superNodeId:<input type="text" name="SID">
+	childNodeId:<input type="text" name="NID">
 	<input type="submit" value="submit">
 </form>
 
+
+<p>*************************user*************************</p>
 
 <br><p> test create user </p>
 <form action="/webapi/create-user" method="post">

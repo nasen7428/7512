@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
-from WebAPI.models import Node, User
+from WebAPI.models import Node, User,Space
 from django.shortcuts import render
 
 
@@ -60,10 +60,12 @@ def setNodeAttr(request):
     node.setAttr(request.POST['AttrName'], request.POST['AttrValue'])
     node.save()
 
+#################################空间###################################
+
 #向NID的子节点添加一个子空间
 @POST
 def addChildSpace(request):
-    node=Node.objects.get(id=request.POST['NID'])
+    node=Node.objects.get(id=request.POST['ID'])
     space=Space()
     space.save()
     node.addSpace(space.id)

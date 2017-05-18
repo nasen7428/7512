@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+	<canvas id="spaceCanvas" width="200" height="100"></canvas>
+	<script >
+		$(document).ready(function(){
+//获取要绘制的数据
+var spaceid={{spaceId}};
+
+//准备要绘制的数据，进行适配转换
+var data={{spaceNodes}};
+console.log(data);
+
+//index为0时是起始，否则初始为1
+var viewdata=new Array();
+for (srcdata in data){
+	viewdata.push({
+		id:srcdata.id,
+		title:srcdata.title,
+		afterlist:srcdata.afterlist,
+		index:(srcdata.isstart?0:-1),
+		indexinh:0
+
+	})
+}
+//计算图中每个节点的最小前置距离
+var funFindNodeById=function(id){//依据id获取节点
+	for(vd in viewdata){
+		if(vd.id==id)return vd;
+	}
+}
+var funAddAfterNode=function(node){//递归设置前置距离
+	var nextindex=node.index+1;
+	for(var i=0;i<node.afterlist.length;i++){
+		nextnode=funFindNodeById(node.afterlist[i]);
+		if(nextnode.index<nextindex){
+			nextnode.index=nextindex;
+			funAddAfterNode(nextnode);
+		}
+	}
+}
+for (vd in viewdata){//遍历起始节点
+	if(vd.index!=0)continue;
+	funAddAfterNode(vd);
+}
+//依据最大最小前置将节点划分为n列，中间空隙插入n-1段空间，绘制链接线
+var maxindex=0;
+for (vd in viewdata){
+	if(maxindex<vd.index)maxindex=vd.index;
+}
+var indexinhmap=new Array();
+for(var i=0;i<=maxindex;i++){
+	indexinhmap[i]=0;
+}
+for(vd in viewdata){//设置网格序列
+	vd.indexinh=indexinhmap[vd.index];
+	indexinhma[vd.index]++;
+}
+
+var vdwidth=200/maxindex+1;
+var vdheight=30;
+
+//开始绘制视图
+
+var canvas=$("#spaceCanvas").get(0);
+console.log(canvas);
+var ctx=canvas.getContext("2d");
+for(vd in viewdata){
+	ctx.fillText(vd.title,vd.index*vdwidth,vd.indexinh*vdheight);
+
+}
+
+});
+
+</script>
+</body>
