@@ -4,76 +4,81 @@
 	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
-	<canvas id="spaceCanvas" width="200" height="100"></canvas>
+	<input type="button" name="addANode" id="addANode">
+	<canvas id="spaceCanvas" width="800" height="600"></canvas>
 	<script >
+		var spaceid={{spaceId}};
 		$(document).ready(function(){
-//获取要绘制的数据
-var spaceid={{spaceId}};
+			$("#addANode").click(function(){//添加一个节点
+				$.post("/webapi/add-child-node",{ID:{{spaceId}}},
+					function(data,status){
 
-//准备要绘制的数据，进行适配转换
-var data={{spaceNodes}};
-console.log(data);
-
-//index为0时是起始，否则初始为1
-var viewdata=new Array();
-for (srcdata in data){
-	viewdata.push({
-		id:srcdata.id,
-		title:srcdata.title,
-		afterlist:srcdata.afterlist,
-		index:(srcdata.isstart?0:-1),
-		indexinh:0
-
-	})
-}
-//计算图中每个节点的最小前置距离
-var funFindNodeById=function(id){//依据id获取节点
-	for(vd in viewdata){
-		if(vd.id==id)return vd;
-	}
-}
-var funAddAfterNode=function(node){//递归设置前置距离
-	var nextindex=node.index+1;
-	for(var i=0;i<node.afterlist.length;i++){
-		nextnode=funFindNodeById(node.afterlist[i]);
-		if(nextnode.index<nextindex){
-			nextnode.index=nextindex;
-			funAddAfterNode(nextnode);
-		}
-	}
-}
-for (vd in viewdata){//遍历起始节点
-	if(vd.index!=0)continue;
-	funAddAfterNode(vd);
-}
-//依据最大最小前置将节点划分为n列，中间空隙插入n-1段空间，绘制链接线
-var maxindex=0;
-for (vd in viewdata){
-	if(maxindex<vd.index)maxindex=vd.index;
-}
-var indexinhmap=new Array();
-for(var i=0;i<=maxindex;i++){
-	indexinhmap[i]=0;
-}
-for(vd in viewdata){//设置网格序列
-	vd.indexinh=indexinhmap[vd.index];
-	indexinhma[vd.index]++;
-}
-
-var vdwidth=200/maxindex+1;
-var vdheight=30;
-
-//开始绘制视图
-
-var canvas=$("#spaceCanvas").get(0);
-console.log(canvas);
-var ctx=canvas.getContext("2d");
-for(vd in viewdata){
-	ctx.fillText(vd.title,vd.index*vdwidth,vd.indexinh*vdheight);
-
-}
-
-});
-
+					});
+			})
+			//获取要绘制的数据
+			$.get("/webapi/get-child-node",{ID:spaceid},function(data,status){
+				//准备要绘制的数据，进行适配转换
+				console.log(data);
+				//index为0时是起始，否则初始为1
+				var viewdatas=JSON.parse(data);
+				for (var srckey in viewdatas){
+					var srcdata=viewdatas[srckey];
+					srcdata.index=srcdata.isFirst?0:-1;
+					srcdata.indexinh=0;
+				}
+				//计算图中每个节点的最小前置距离
+				var funAddAfterNode=function(node){//递归设置前置距离
+					var nextindex=node.index+1;
+					for(var i in node.afterlist){
+						i=node.afterlist[i];
+						nextnode=viewdatas[i];
+						if(nextnode.index<nextindex){
+							nextnode.index=nextindex;
+							funAddAfterNode(nextnode);
+						}
+					}
+				}
+				for (var vd in viewdatas){//遍历起始节点
+					if(viewdatas[vd].index==0)
+						funAddAfterNode(viewdatas[vd]);
+				}
+				//依据最大最小前置将节点划分为n列，中间空隙插入n-1段空间，绘制链接线
+				var maxindex=0;
+				for (var vd in viewdatas){
+					if(maxindex<viewdatas[vd].index)
+						maxindex=viewdatas[vd].index;
+				}
+				var indexinhmap=new Array();
+				for(var i=0;i<=maxindex;i++){
+					indexinhmap[i]=0;
+				}
+				for(var vd in viewdatas){//设置网格序列
+					var i=viewdatas[vd].index;
+					viewdatas[vd].indexinh=indexinhmap[i];
+					indexinhmap[i]++;
+				}
+				var vdwidth=200/(maxindex+1);
+				var vdheight=30;
+				//开始绘制视图
+				var canvas=$("#spaceCanvas").get(0);
+				console.log(canvas);
+				var ctx=canvas.getContext("2d");
+				for(var vd in viewdatas){
+					var vdobj=viewdatas[vd];
+					var vdobjwidth=vdobj.index*vdwidth;
+					var vdobjheight=(vdobj.indexinh+1)*vdheight;
+					ctx.fillText(vd,vdobjwidth,vdobjheight);//绘制节点
+					for(var ald in vdobj.afterlist){
+						ald=vdobj.afterlist[ald];
+						var alobj=viewdatas[ald];
+						var alobjwidth=alobj.index*vdwidth;
+						var alobjheight=(alobj.indexinh+1)*vdheight;
+						ctx.moveTo(vdobjwidth+20,vdobjheight+10);
+						ctx.lineTo(alobjwidth,alobjheight+10);
+						ctx.stroke();//绘制连线
+					}
+				}
+			})//end  get
+		});
 </script>
 </body>

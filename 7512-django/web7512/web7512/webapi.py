@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from WebAPI.models import Node, User,Space
 from django.shortcuts import render
+import json
 
 
 #测试api的页面
@@ -11,7 +12,9 @@ def apitest(request):
 #检测请求方式
 def Checkfunc(func,request):
     # try:
-        func(request)
+        ret=func(request)
+        if ret:
+            return ret
         return HttpResponse('success')
     # except:
     #     return HttpResponse('server have error')
@@ -74,9 +77,37 @@ def addChildSpace(request):
 #向SID的空间添加一个NID的起始子节点
 @POST
 def addChildNode(request):
-    space=Space.objects.get(id=request.POST['SID'])
-    space.addChildNode(request.POST['NID'])
+    space=Space.objects.get(id=request.POST['ID'])
+    node=Node()
+    node.save()
+    space.addChildNode(node.id)
     space.save()
+
+#获取ID空间的所有子节点
+@GET
+def getAllChildNode(request):
+    # for node in Node.objects.all():
+    #     node.clearUnuselessLink()
+    space=Space.objects.get(id=request.GET['ID'])
+    childnodelist=space.getStartNodes()
+    rentlist={}
+    for childId in childnodelist:#获取起始节点
+        node=Node.objects.get(id=childId)
+        rentlist[childId]={'isFirst':True,'afterlist':node.getAfterNodes()}
+    while True:
+        addidlist=[]
+        for rentnode in rentlist.values():#递归获取所有节点
+            for rnalid in rentnode['afterlist']:
+                rnalid=int(rnalid)
+                if not rnalid in rentlist:
+                    addidlist.append(int(rnalid))
+        for addid in addidlist:
+            node=Node.objects.get(id=addid)
+            rentlist[addid]={'isFirst':False,'afterlist':node.getAfterNodes()}
+        else:
+            break
+    jsonspacenode=json.dumps(rentlist)
+    return HttpResponse(jsonspacenode)
 
 ######################################用户####################
 

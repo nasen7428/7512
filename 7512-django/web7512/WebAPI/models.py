@@ -17,75 +17,109 @@ class Node(models.Model):
     #节点空间列表
     spacelist=models.TextField()
 
+    #获取属性
+    def getAttrs(self):
+        try:
+            return json.loads(self.attribute)
+        except:
+            return {}
+
     #设置属性
     def setAttr(self,attrName,attrValue):
-        try:
-            attrdict=json.loads(self.attribute)
-        except:
-            attrdict={}
+        attrdict=self.getAttrs()
         attrdict[attrName]=attrValue
         self.attribute=json.dumps(attrdict)
 
+
+    #获取后继节点列表
+    def getAfterNodes(self):
+        try:
+            return json.loads(self.afterlist)
+        except:
+            return []
+
     #添加后继节点
     def addAfterNode(self,nodeId):
-        try:
-            afternodelist=json.loads(self.afterlist)
-        except:
-            afternodelist=[]
-        afternodelist.append(nodeId)
+        afternodelist=self.getAfterNodes()
+        afternodelist.append(int(nodeId))
         self.afterlist=json.dumps(afternodelist)
+
+    #删除后继节点
+    def removeAfterNode(self,nodeId):
+        afternodelist=self.getAfterNodes()
+        try:
+            afternodelist.remove(nodeId)
+        except:
+            pass
+        try:
+            afternodelist.remove(str(nodeId))
+        except:
+            pass
+        self.afterlist=json.dumps(afternodelist)
+
+    #获取子空间
+    def getSpaces(self):
+        try:
+            return json.loads(self.spacelist)
+        except:
+            return []
 
     #添加节点子空间
     def addSpace(self,spaceId):
-        try:
-            nodespacelist=json.loads(self.spacelist)
-        except:
-            nodespacelist=[]
-        nodespacelist.append(spaceId)
+        nodespacelist=self.getSpaces()
+        nodespacelist.append(int(spaceId))
         self.spacelist=json.dumps(nodespacelist)
 
-    #获取后继节点列表
-    def getAfterNode(self):
+    #删除子空间
+    def removeSpace(self,spaceId):
+        nodespacelist=self.getSpaces()
         try:
-            afternodelist=json.loads(self.afterlist)
+            nodespacelist.remove(spaceId)
         except:
-            afternodelist=[]
-        return afternodelist
+            pass
+        try:
+            nodespacelist.remove(str(spaceId))
+        except:
+            pass
+        self.spacelist=json.dumps(nodespacelist)
+
+    #清理无效链接
+    def clearUnuselessLink(self):
+        afternodelist=self.getAfterNodes()
+        for anode in afternodelist:
+            anode=int(anode)
+            try:
+                Node.objects.get(id=anode)
+            except:
+                self.removeAfterNode(anode)
+        nodespacelist=self.getSpaces()
+        for space in nodespacelist:
+            space=int(space)
+            try:
+                Space.objects.get(id=space)
+            except:
+                self.removeSpace(space)
+        self.save()
+
+
 
 #节点空间
 class Space(models.Model):
     #空间起始节点
     childlist=models.TextField()
+
+    #获取空间的起始节点
+    def getStartNodes(self):
+        try:
+            return json.loads(self.childlist)
+        except:
+            return []
+
     #添加空间起始节点
     def addChildNode(self,nodeId):
-        try:
-            childnodelist=json.loads(self.childlist)
-        except:
-            childnodelist=[]
-        childnodelist.append(nodeId)
+        childnodelist=self.getStartNodes()
+        childnodelist.append(int(nodeId))
         self.childlist=json.dumps(childnodelist)
-
-    #获取空间所有节点
-    def getAllNode(self):
-        try:
-            childnodelist=json.loads(self.childlist)
-        except:
-            childnodelist=[]
-        rentlist={}
-        logger.info('start node')
-        for childId in childnodelist:#获取起始节点
-            node=Node.objects.get(id==childId)
-            rentlist[childId]={isFirst:True,afterlist:node.getAfterNode()}
-        logger.info('start node end')
-        for rentnode in rentlist.values():#递归获取所有节点
-            for rnalid in rentnode[afterlist]:
-                if rentlist.has_key(rnalid):
-                    continue
-                node=Node.objects.get(id==rnalid)
-                rentlist[rnalid]={isFirst:False,afterlist:node.getAfterNode()}
-        logger.info('after node end')
-        return rentlist
-
 
 #用户
 class User(models.Model):

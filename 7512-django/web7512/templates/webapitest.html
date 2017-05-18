@@ -40,9 +40,14 @@
 
 <br><p> test add child node</p>
 <form action="/webapi/add-child-node" method="post">
-	superNodeId:<input type="text" name="SID">
-	childNodeId:<input type="text" name="NID">
+	spaceId:<input type="text" name="ID">
 	<input type="submit" value="submit">
+</form>
+
+<br><p> test get all child node</p>
+<form action="/webapi/get-child-node" method="get">
+	spaceId:<input type="text" name="ID">
+	<input type="submit" name="submit">
 </form>
 
 

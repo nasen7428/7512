@@ -7,8 +7,7 @@
 
 	<script >
 	$(function(){
-			$("#btncreatespace")
-			.click(function(){
+			$("#btncreatespace").click(function(){
 				//添加一个子空间
 				$.post("/webapi/add-child-space",{
 					ID:{{nodeId}}
